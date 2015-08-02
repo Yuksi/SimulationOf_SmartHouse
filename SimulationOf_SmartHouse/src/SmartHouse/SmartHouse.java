@@ -78,13 +78,7 @@ public class SmartHouse extends JFrame {
 			}
 		}
 		
-		public void paint(Graphics g) {
-			if (image != null) {					// Рисуем картинку
-				g.drawImage(image, 0, 0, null);
-			}
-			super.paintChildren(g);			// Рисуем подкомпоненты.
-			super.paintBorder(g);			// Рисуем рамку      
-			//g.drawOval(x, y, 40, 40);
+		public void paintMan(Graphics g) {
 			g.setColor(Color.BLACK);
 			g.drawOval(man.getA()-20, man.getB()-20, 40, 40);
 			g.setColor(Color.RED);
@@ -96,7 +90,9 @@ public class SmartHouse extends JFrame {
 			g.setColor(Color.BLACK);
 			g.fillOval(man.getA()+3, man.getB()-5, 5,5);
 			g.fillOval(man.getA()-7, man.getB()-5, 5,5);
-
+		}
+		
+		public void paintSensors(Graphics g) {
 			g.setColor(Color.BLACK);
 			g.drawArc(sMHall1.getX()-5, sMHall1.getY()-5, 10, 10, 0,-180);
 			g.drawArc(sMHall2.getX(), sMHall2.getY()-15, 10, 10, 90,180);
@@ -153,7 +149,9 @@ public class SmartHouse extends JFrame {
 				g.setColor(Color.CYAN);
 				g.fillOval(sMBath.getX(), sMBath.getY()-15, 10, 10);
 			}
-			
+		}
+		
+		public void paintLightsCeil(Graphics g) {
 			g.setColor(Color.YELLOW);
 			g.drawRect(lC1Room.getX()+5, lC1Room.getY(), 15, 15);
 			g.drawRect(lC2Room.getX()+5, lC2Room.getY(), 15, 15);
@@ -214,7 +212,19 @@ public class SmartHouse extends JFrame {
 					g.fillRect(lCHall[i].getX()+1, lCHall[i].getY()-14, 14, 14);
 				}
 			}
+		}
+		
+		public void paint(Graphics g) {
+			if (image != null) {					// Рисуем картинку
+				g.drawImage(image, 0, 0, null);
+			}
+			super.paintChildren(g);			// Рисуем подкомпоненты.
+			super.paintBorder(g);			// Рисуем рамку      
+			//g.drawOval(x, y, 40, 40);
 			
+			paintMan(g);
+			paintSensors(g);
+			paintLightsCeil(g);
 		}
 
 		// Методы для настройки картинки.
@@ -255,55 +265,55 @@ public class SmartHouse extends JFrame {
 		jPan = new JPanel();
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		picPan.setLayout(new BorderLayout());
-		picPan.setImageFile(new File("D:/documents/java/workspace/SimulationOf_SmartHouse/images/план.jpg"));
+		picPan.setImageFile(new File("./src/images/plan.jpg"));
 		jPan.setLayout(new BoxLayout(jPan,BoxLayout.Y_AXIS));
 		jPan.setOpaque(false);
 		setResizable(false);
 		setTitle("This is Simulation of the system: SmartHouse");
 
-		ImageIcon icon = new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/eye2.png");
+		ImageIcon icon = new ImageIcon("./src/images/eye2.png");
 		followLight = new JToggleButton(icon);
-		followLight.setSelectedIcon(new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/eye.png"));
+		followLight.setSelectedIcon(new ImageIcon("./src/images/eye.png"));
 		followLight.setAlignmentX(JComponent.RIGHT_ALIGNMENT);
 		followLight.setMaximumSize(new Dimension(80, 500));
 		followLight.setMinimumSize(new Dimension(20, 20));
 		followLight.setPreferredSize(new Dimension(80, 80));
 		
-		ImageIcon iconLightRoom = new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/light_of.png");
+		ImageIcon iconLightRoom = new ImageIcon("./src/images/light_of.png");
 		lightInRoom = new JToggleButton(iconLightRoom);
-		lightInRoom.setSelectedIcon(new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/light_on.png"));
+		lightInRoom.setSelectedIcon(new ImageIcon("./src/images/light_on.png"));
 		lightInRoom.setAlignmentX(JComponent.RIGHT_ALIGNMENT);
 		lightInRoom.setMaximumSize(new Dimension(80, 500));
 		lightInRoom.setMinimumSize(new Dimension(20, 20));
 		lightInRoom.setPreferredSize(new Dimension(80, 80));
 		
-		ImageIcon iconLightKitch = new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/light_of_kitch.png");
+		ImageIcon iconLightKitch = new ImageIcon("./src/images/light_of_kitch.png");
 		lightInKitch = new JToggleButton(iconLightKitch);
-		lightInKitch.setSelectedIcon(new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/light_on_kitch.png"));
+		lightInKitch.setSelectedIcon(new ImageIcon("./src/images/light_on_kitch.png"));
 		lightInKitch.setAlignmentX(JComponent.RIGHT_ALIGNMENT);
 		lightInKitch.setMaximumSize(new Dimension(80, 500));
 		lightInKitch.setMinimumSize(new Dimension(20, 20));
 		lightInKitch.setPreferredSize(new Dimension(80, 80));
 		
-		ImageIcon iconLightBath = new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/light_of_bath.png");
+		ImageIcon iconLightBath = new ImageIcon("./src/images/light_of_bath.png");
 		lightInBath = new JToggleButton(iconLightBath);
-		lightInBath.setSelectedIcon(new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/light_on_bath.png"));
+		lightInBath.setSelectedIcon(new ImageIcon("./src/images/light_on_bath.png"));
 		lightInBath.setAlignmentX(JComponent.RIGHT_ALIGNMENT);
 		lightInBath.setMaximumSize(new Dimension(80, 500));
 		lightInBath.setMinimumSize(new Dimension(20, 20));
 		lightInBath.setPreferredSize(new Dimension(80, 80));
 		
-		ImageIcon iconLightHall = new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/light_of_hall.png");
+		ImageIcon iconLightHall = new ImageIcon("./src/images/light_of_hall.png");
 		lightInHall = new JToggleButton(iconLightHall);
-		lightInHall.setSelectedIcon(new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/light_on_hall.png"));
+		lightInHall.setSelectedIcon(new ImageIcon("./src/images/light_on_hall.png"));
 		lightInHall.setAlignmentX(JComponent.RIGHT_ALIGNMENT);
 		lightInHall.setMaximumSize(new Dimension(80, 500));
 		lightInHall.setMinimumSize(new Dimension(20, 20));
 		lightInHall.setPreferredSize(new Dimension(80, 80));
 		
-		ImageIcon iconLight = new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/all_of.png");
+		ImageIcon iconLight = new ImageIcon("./src/images/all_of.png");
 		lights = new JToggleButton(iconLight);
-		lights.setSelectedIcon(new ImageIcon("D:/documents/java/workspace/SimulationOf_SmartHouse/images/all_on.png"));
+		lights.setSelectedIcon(new ImageIcon("./src/images/all_on.png"));
 		lights.setAlignmentX(JComponent.RIGHT_ALIGNMENT);
 		lights.setMaximumSize(new Dimension(80, 500));
 		lights.setMinimumSize(new Dimension(20, 20));
@@ -421,12 +431,49 @@ public class SmartHouse extends JFrame {
 		jPan.add(box);
 		picPan.add(jPan, BorderLayout.NORTH);
 		getContentPane().add(picPan, BorderLayout.CENTER);
-		pack();
 	}
 
 	private class JFrameMouseListener implements MouseListener {
 		public void mouseClicked(MouseEvent e) {
+			if (e.getX()>15*n+20) {
+				xClicked=15*n+20;
+			}
+			if (e.getY()>15*n) {
+				yClicked=15*n;
+			}
+			if (e.getX()<1*n) {
+				xClicked=1*n;
+			}
+			if (e.getY()<1*n) {
+				yClicked=1*n;
+			}
 			
+			if (e.getX()>=1*n&&e.getX()<=15*n) {
+				if (e.getX()>bedroom.getX2()&&e.getX()<bedroom.getX2()+33&&e.getY()<=bedroom.getY2()&&e.getY()>bedroom.getY1())
+					xClicked = bedroom.getX2()+33;
+				else if (e.getX()<=bedroom.getX2()&&e.getX()>bedroom.getX2()-n/2&&e.getY()<=bedroom.getY2()&&e.getY()>bedroom.getY1())
+					xClicked = bedroom.getX2()-15;
+				else if (e.getX()>bathroom.getX1()&&e.getX()<bathroom.getX1()+33&&e.getY()<bathroom.getY2()&&e.getY()>=bathroom.getY1())
+					xClicked = bathroom.getX1()+33;
+				else if (e.getX()<=bathroom.getX1()&&e.getX()>bathroom.getX1()-n/2&&e.getY()<bathroom.getY2()&&e.getY()>bathroom.getY1())
+					xClicked = bathroom.getX1()-15;
+				else
+					xClicked=e.getX();
+			}
+			if (e.getY()>=1*n&&e.getY()<=15*n) {
+				if (e.getY()>=hallway.getY2()&&e.getY()<hallway.getY2()+n/2&&e.getX()>hallway.getX1()&&e.getX()<=hallway.getX2()+20)
+					yClicked=hallway.getY2()+n/2;
+				else if (e.getY()<hallway.getY2()&&e.getY()>hallway.getY2()-n/2&&e.getX()>hallway.getX1()&&e.getX()<=hallway.getX2()+20)
+					yClicked=hallway.getY2()-25;
+				else if (e.getY()>=kitchen.getY2()&&e.getY()<kitchen.getY2()+n/2&&e.getX()>=kitchen.getX1()&&e.getX()<kitchen.getX2()+20)
+					yClicked=hallway.getY1()+n/2;
+				else if (e.getY()<kitchen.getY2()&&e.getY()>kitchen.getY2()-n/2&&e.getX()>=kitchen.getX1()&&e.getX()<kitchen.getX2()+20)
+					yClicked=hallway.getY1()-25;
+				else
+				yClicked=e.getY();
+			}
+			click.setLocation(xClicked,yClicked);
+			man.goClick();
 		}
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseExited(MouseEvent e) {}
@@ -547,10 +594,10 @@ public class SmartHouse extends JFrame {
 
 	public static void followLights(){
 		if (lightsFollowProfile) {
-		contrRoom.turnLineCeil(flat,man);
-		contrKitch.turnLineCeil(flat,man);
-		contrBath.turnLineCeil(flat,man);
-		contrHall.turnLineCeil(flat,man);
+			contrRoom.turnLineCeil(flat,man);
+			contrKitch.turnLineCeil(flat,man);
+			contrBath.turnLineCeil(flat,man);
+			contrHall.turnLineCeil(flat,man);
 		}
 	}
 
@@ -571,22 +618,6 @@ public class SmartHouse extends JFrame {
 				new SmartHouse().setVisible(true);
 			}
 		});
-
-
-		/*
-		System.out.println(man);
-		System.out.println("Room-"+lC1Room.getFlare()+"."+lC2Room.getFlare()+" Kitchen-"+lC1Kitch.getFlare()+"."+lC2Kitch.getFlare()+" Bathroom-"+lC1Bath.getFlare()+"."+lC2Bath.getFlare()+" Hall-"+lC1Hall.getFlare()+"."+lC2Hall.getFlare()+"."+lC3Hall.getFlare()+"."+lC4Hall.getFlare());
-		clicking(1,1);
-		System.out.println(man);
-		clicking(9,8);
-		System.out.println(man);
-		clicking(14,11);
-		System.out.println(man);
-		clicking(11,11);
-		System.out.println(man);
-		clicking(1,15);
-		System.out.println(man);
-		 */
 	}
 
 }
